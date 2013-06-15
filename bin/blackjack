@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+require 'rubygems'
+gem 'blackjack'
+
+require 'blackjack'
+require 'trollop'
+
+def main(argc, argv)
+  opts = Trollop::options do
+    version "blackjack 0.0.1 (c) 2013 Cloudsdale and Contributors"
+    opt :email, "Bot login email"
+    opt :password, "Bot login password"
+  end
+  Trollop::die :email, "Must specify login email" if opts[:email].nil?
+  Trollop::die :password, "Must specify login email" if opts[:password].nil?
+  blackjack = Blackjack.new(opts)
+  blackjack.run
+end
+
+main(ARGV.length, ARGV)
